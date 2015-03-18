@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var host = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
 // respond with "Hello World!" on the homepage
 app.get('/', function(req, res) {
   res.send('Hello World!');
@@ -21,11 +24,11 @@ app.delete('/user', function(req, res) {
   res.send('Got a DELETE request at /user');
 });
 
-var server = app.listen(3000, function() {
-
+var server = app.listen(port, host, function() {
+  /*
   var host = server.address().address;
   var port = server.address().port;
-
+  */
   console.log('Example app listening at http://%s:%s', host, port);
 
 });
